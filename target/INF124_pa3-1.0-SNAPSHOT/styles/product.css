@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+li, a, h1, div, button, p, input{
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 400;
+    text-decoration: none;
+    color: #0064a4;
+}
+
+.product-details__container {
+    margin: 0 30px 30px 30px;
+}
+
+#product-image {
+    width: auto;
+    height: 400px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+}
+
+#price__container {
+    display: flex;
+    align-items: center;
+}
+
+#product-price {
+    font-weight: 700;
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+#add-container {
+    margin-left: 50px;
+}
+
+#quantity-input {
+    font-size: 20px;
+    padding: 7px;
+    width: 100px;
+}
+
+#add-button {
+    margin-left: 25px;
+}
+
+#product-name {
+    font-weight: 500;
+    font-size: 40px;
+}
+
+#product-model {
+    font-weight: 500;
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+
+#product-details {
+    margin-bottom: 30px;
+}
+
+#product-table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#product-table td {
+    padding: 5px 20px 5px 5px;
+    border-bottom: 1px solid rgba(0, 62, 120, 0.1);
+    white-space: pre;
+}
+
+#product-table td:nth-child(odd) {
+    font-weight: 700;
+}
