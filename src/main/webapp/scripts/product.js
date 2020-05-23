@@ -11,7 +11,6 @@ window.addEventListener('load', onLoad);
 addButton.addEventListener('click', onAddClick);
 
 function onLoad() {
-    let productQueryId = JSON.parse(sessionStorage.getItem('productQueryId'));
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         // 4 means finished, and 200 means okay.
@@ -45,7 +44,7 @@ function onLoad() {
 
         }
     }
-    xhr.open("GET", `ProductServlet?id=${productQueryId.id}&category=${productQueryId.category}`, true);
+    xhr.open("GET", "ProductServlet", true);
     xhr.send();
 
 }
@@ -62,7 +61,6 @@ function createProductName(attributeList) {
     return name;
 }
 
-// TODO: refactor to use servlets
 function onAddClick() {
     if (Number(quantityInput.value) > 0) {
         let pID = JSON.parse(sessionStorage.getItem('productQueryId'));
@@ -75,7 +73,7 @@ function onAddClick() {
         }
         xhr.open("POST", "CartServlet/add", true);
         xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-        xhr.send(`pID=${pID.id}&quantity=${quantity}`);
+        xhr.send(`quantity=${quantity}`);
     }
 }
 

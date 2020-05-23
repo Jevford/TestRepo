@@ -1,12 +1,16 @@
 import com.google.gson.Gson;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductListServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -18,6 +22,42 @@ public class ProductListServlet extends HttpServlet {
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String pathInfo = request.getPathInfo(), methodIdentifier = null;
+        if (pathInfo != null) {
+            String[] pathParts = pathInfo.split("/");
+            methodIdentifier = pathParts[1];
+        }
+
+        if (methodIdentifier == null) {
+            // Future method involving no request parameters can be used here
+        } else if (methodIdentifier.equals("get")) {
+            if (request.getParameter("pID") != null) {
+                processGetProductRequest(request, response);
+            } else {
+                processGetAllProductsRequest(request, response);
+            }
+        }
+    }
+
+    private void processGetProductRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(true);
+        String productID = request.getParameter("pID");
+
+        // Create list of recently viewed items if it doesn't exist
+        if (session.getAttribute("lastViewedList") == null) {
+            session.setAttribute("lastViewedList", new ArrayList<Integer>());
+        }
+
+        List<Integer> lastViewedList = (List<Integer>) session.getAttribute("lastViewedList");
+        if (lastViewedList.contains(Integer.valueOf(productID))) {
+            lastViewedList.remove(Integer.valueOf(productID));  // put it back in front if exists
+        }
+        lastViewedList.add(0, Integer.valueOf(productID));
+        session.setAttribute("lastViewedList", lastViewedList);
+        // TODO: Get it to redirect to product.html
+    }
+
+    private void processGetAllProductsRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         ProductListResponse listResponse = new ProductListResponse();
         Connection conn = null;
         Statement stmt = null;
@@ -61,7 +101,24 @@ public class ProductListServlet extends HttpServlet {
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
+
+        // Include last viewed list if exists
+        HttpSession session = request.getSession(true);
+        if (session.getAttribute("lastViewedList") != null) {
+            List<Integer> lastViewedList = (List<Integer>) session.getAttribute("lastViewedList");
+            if (lastViewedList.size() > 0) {
+                response.getWriter().write("{");
+                response.getWriter().write("\"productListResponse\":" + json + ",");
+                response.getWriter().write("\"lastViewedListResponse\":");
+
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/LastViewedServlet/get");
+                dispatcher.include(request, response);
+
+                response.getWriter().write("}");
+            }
+        } else {
+            response.getWriter().write(json);
+        }
     }
 
     private ProductCPU createProductCPU(ResultSet rs) throws SQLException {

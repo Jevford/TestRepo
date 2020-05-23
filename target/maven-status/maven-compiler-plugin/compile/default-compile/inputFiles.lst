@@ -1,5 +1,6 @@
 C:\Users\Jevford\Desktop\INF124_pa3\src\main\java\Customer.java
 C:\Users\Jevford\Desktop\INF124_pa3\src\main\java\CartResponse.java
+C:\Users\Jevford\Desktop\INF124_pa3\src\main\java\CheckoutServlet.java
 C:\Users\Jevford\Desktop\INF124_pa3\src\main\java\ProductServlet.java
 C:\Users\Jevford\Desktop\INF124_pa3\src\main\java\CustomerServlet.java
 C:\Users\Jevford\Desktop\INF124_pa3\src\main\java\ProductCPU.java
@@ -7,7 +8,9 @@ C:\Users\Jevford\Desktop\INF124_pa3\src\main\java\ProductListServlet.java
 C:\Users\Jevford\Desktop\INF124_pa3\src\main\java\CartServlet.java
 C:\Users\Jevford\Desktop\INF124_pa3\src\main\java\ProductListResponse.java
 C:\Users\Jevford\Desktop\INF124_pa3\src\main\java\Database.java
+C:\Users\Jevford\Desktop\INF124_pa3\src\main\java\OrderSummary.java
 C:\Users\Jevford\Desktop\INF124_pa3\src\main\java\ProductVC.java
+C:\Users\Jevford\Desktop\INF124_pa3\src\main\java\LastViewedServlet.java
 C:\Users\Jevford\Desktop\INF124_pa3\src\main\java\Credentials.java
 C:\Users\Jevford\Desktop\INF124_pa3\src\main\java\Product.java
 C:\Users\Jevford\Desktop\INF124_pa3\src\main\java\CartItem.java

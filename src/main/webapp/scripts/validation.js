@@ -53,6 +53,7 @@ const validate = function(ev){
     // inputs for Credit Card Info
     let cardNumber = document.getElementById('input-cardNumber');
     let expiration = document.getElementById('input-expiration');
+    // let expirationString = expiration.value.split("/");
     let securityCode = document.getElementById('input-securityCode');
 
     //.value, .defaultValue, length of value
@@ -91,6 +92,12 @@ const validate = function(ev){
     if( expiration.value === ""){
         failures.push({input:'input-expiration', msg:'Required Field'});
     }
+    // if( expirationString.length < 2){
+    //     failures.push({input:'input-expiration', msg:'Required Field'});
+    // }
+    // if( parseInt(expirationString[0], 10) < 6 || parseInt(expirationString[1], 10) < 2020){
+    //     failures.push({input:'input-expiration', msg:'Required Field'});
+    // }
     if( securityCode.value === ""){
         failures.push({input:'input-securityCode', msg:'Required Field'});
     }
